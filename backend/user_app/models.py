@@ -25,7 +25,7 @@ class User(AbstractBaseUser, PermissionsMixin):
   is_superuser = models.BooleanField(default=False)
   date = models.DateTimeField(auto_now_add=True)
 
-  object = UserManager()
+  objects = UserManager()
 
   USERNAME_FIELD = 'email'
   REQUIRED_FIELDS = []

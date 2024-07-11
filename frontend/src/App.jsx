@@ -8,6 +8,7 @@ import GetSupportPage from "./pages/GetSupportPage";
 import RecieptPage from "./pages/RecieptPage";
 import { AuthProvider } from "./context/AuthContext";
 import { FormDataProvider } from "./context/FormDataContext";
+import TransactionsPage from "./pages/TransactionsPage";
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
             </Route>
             <Route element={<PrivateRoute />}>
               <Route path="/get-support" element={<GetSupportPage />} />
+            </Route>
+            <Route element={<PrivateRoute />}>
+              <Route path="/transactions" element={<TransactionsPage />} />
             </Route>
           </Routes>
         </FormDataProvider>

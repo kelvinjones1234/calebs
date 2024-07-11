@@ -1,12 +1,13 @@
 from django.db import models
 from payment_app .models import Department, Fee
+from user_app.models import User
 
 class Transaction(models.Model):
   matriculation_number = models.CharField(max_length=20)
   first_name = models.CharField(max_length=50)
   middle_name = models.CharField(max_length=50, blank=True, null=True)
   last_name = models.CharField(max_length=50)
-  email = models.EmailField()
+  email = models.ForeignKey(User, on_delete=models.CASCADE)
   department = models.ForeignKey(Department, on_delete=models.CASCADE)
   fee = models.ForeignKey(Fee, on_delete=models.CASCADE)
   amount = models.CharField(max_length=50)

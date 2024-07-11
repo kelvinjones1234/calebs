@@ -60,7 +60,7 @@ const ReceiptPage = () => {
               first_name: transactionData.metadata.first_name,
               middle_name: transactionData.metadata.middle_name,
               last_name: transactionData.metadata.last_name,
-              email: user.email,
+              email: 1,
               department: transactionData.metadata.department_id,
               fee: transactionData.metadata.fee_id,
               amount: transactionData.metadata.amount,

@@ -26,8 +26,8 @@ const PaymentPage = () => {
             <Navbar rightButton="Get support" />
 
             <div className="flex justify-center">
-              <div className="form-container my-[5rem] border w-[500px] shadow py-[3rem] rounded-[1rem]">
-                <p className="text-center font-semibold">
+              <div className="form-container mt-[3rem] mb-[5rem] border w-[500px] shadow pb-[3rem] rounded-[1rem]">
+                <p className="text-center font-semibold pt-[2rem] pb-[.5rem]">
                   Fill in the form below to make payment
                 </p>
                 <form

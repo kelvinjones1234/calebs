@@ -1,11 +1,11 @@
 from rest_framework import generics
 from .models import Transaction
-from .serializers import TransactionSerializer
+from .serializers import TransactionSerializer, GetTransactionSerializer
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-
+from rest_framework.permissions import IsAuthenticated
 
 
 class TransactionView(APIView):
@@ -20,6 +20,14 @@ class TransactionView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class GetUserTransactions(generics.ListAPIView):
+  serializer_class = GetTransactionSerializer
+  permission_classes = [IsAuthenticated]
+
+  def get_queryset(self):
+    return Transaction.objects.filter(email=self.request.user.id)
 
 
 class TransactionRetrieveView(generics.RetrieveAPIView):
