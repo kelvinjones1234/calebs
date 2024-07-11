@@ -50,7 +50,7 @@ const HomeHero = () => {
 								onChange={(e) => setPassword(e.target.value)}
 								type="password"
 								placeholder="Password"
-								className="border px-2 w-[15rem] rounded"
+								className="border px-2 w-[15rem] rounded outline-0"
 							/>
 						</div>
 					</div>
@@ -70,7 +70,7 @@ const HomeHero = () => {
 								value={email}
 								type="email"
 								placeholder="Email"
-								className="border px-2 w-[15rem] rounded"
+								className="border px-2 w-[15rem] rounded outline-0 border-sky-500"
 								onChange={(e) => setEmail(e.target.value)}
 							/>
 						</div>
@@ -79,7 +79,7 @@ const HomeHero = () => {
 								value={password}
 								type="password"
 								placeholder="Password"
-								className="border px-2 w-[15rem] rounded"
+								className="border px-2 w-[15rem] rounded outline-0 border-sky-500"
 								onChange={(e) => setPassword(e.target.value)}
 							/>
 						</div>

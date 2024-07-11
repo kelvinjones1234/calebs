@@ -1,8 +1,7 @@
 from django.urls import path
-from .views import TransactionView
+from .views import TransactionView, TransactionRetrieveView
 
 urlpatterns = [
-  path('initiate-payment/', TransactionView.as_view(), name='transaction'),
-  path('transaction/<str:ref_number>/', TransactionView.as_view(), name='transaction-detail'),
-
+    path('transaction/', TransactionView.as_view(), name='transaction-detail'),
+    path('transaction/<str:reference_number>/', TransactionRetrieveView.as_view(), name='transaction-detail'),
 ]

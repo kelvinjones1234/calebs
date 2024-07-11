@@ -14,7 +14,9 @@ export const FormDataProvider = ({ children }) => {
     middle_name: "",
     last_name: "",
     department: "",
+    department_id: null, // Added department_id
     fee: "",
+    fee_id: null, // Added fee_id
     amount: "",
   });
 
@@ -38,7 +40,9 @@ export const FormDataProvider = ({ children }) => {
         last_name: formData.last_name,
         middle_name: formData.middle_name,
         department: formData.department,
+        department_id: formData.department_id, // Included department_id
         fee: formData.fee,
+        fee_id: formData.fee_id, // Included fee_id
         amount: formData.amount,
         matriculation_number: formData.matriculation_number,
       };
@@ -70,7 +74,6 @@ export const FormDataProvider = ({ children }) => {
       if (data.status) {
         window.location.replace(data.data.authorization_url);
       } else {
-        // Handle errors appropriately (e.g., display an error message)
         console.error("Payment failed:", data.message);
       }
     } catch (error) {
@@ -93,6 +96,7 @@ export const FormDataProvider = ({ children }) => {
     setFormData((prevState) => ({
       ...prevState,
       department: selectedDepartment ? selectedDepartment.department : "",
+      department_id: selectedDepartment ? selectedDepartment.id : null, // Set department_id
       fee: "",
       amount: "",
     }));
@@ -109,6 +113,7 @@ export const FormDataProvider = ({ children }) => {
     setFormData((prevState) => ({
       ...prevState,
       fee: selectedFee ? selectedFee.fee : "",
+      fee_id: selectedFee ? selectedFee.id : null, // Set fee_id
       amount: selectedFee ? selectedFee.amount : "",
     }));
   };
