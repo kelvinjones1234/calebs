@@ -4,7 +4,7 @@ import AuthContext from "../context/AuthContext";
 
 const PrivateRoute = () => {
 	const { user } = useContext(AuthContext);
-	return <div>{user ? <Outlet /> : <Navigate to="/home-page" />}</div>;
+	return <div>{user ? <Outlet /> : <Navigate to="/login" />}</div>;
 };
 
 export default PrivateRoute;

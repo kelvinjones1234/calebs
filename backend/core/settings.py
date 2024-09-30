@@ -33,13 +33,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework_simplejwt',
+    'rest_framework',
     'transaction_app',
     'customer_care_app',
     'user_app',
     'payment_app',
     'corsheaders',
-    'rest_framework',
-    'rest_framework_simplejwt',
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -190,4 +190,22 @@ SIMPLE_JWT = {
     "TOKEN_BLACKLIST_SERIALIZER": "rest_framework_simplejwt.serializers.TokenBlacklistSerializer",
     "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
+}
+
+
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Admin",  # Title of the admin site
+    "site_header": "Admin Dashboard",  # Header of the admin site
+    "site_brand": "Admin",  # Brand name on the admin site
+    "site_logo": None,  # Path to logo if you have one
+    "welcome_sign": "Welcome to the Admin Dashboard",  # Welcome message
+    "copyright": "PraiseMedia",  # Copyright notice
+    "search_model": "auth.User",  # Model to be used for search
+    "user_avatar": "avatar_url",  # URL to the user's avatar
+    
+    # Additional configuration
+    "show_ui_builder": False,  # Enable UI Builder if needed
+    "custom_css": None,  # Path to custom CSS
+    "custom_js": None,  # Path to custom JS
 }

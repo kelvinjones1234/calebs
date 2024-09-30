@@ -27,7 +27,7 @@ class GetUserTransactions(generics.ListAPIView):
   permission_classes = [IsAuthenticated]
 
   def get_queryset(self):
-    return Transaction.objects.filter(email=self.request.user.id)
+    return Transaction.objects.filter(matriculation_number=self.request.user.id)
 
 
 class TransactionRetrieveView(generics.RetrieveAPIView):

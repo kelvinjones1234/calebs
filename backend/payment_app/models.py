@@ -8,6 +8,14 @@ class Department(models.Model):
   def __str__(self):
     return self.department
   
+class OtherData(models.Model):
+  level = models.CharField(max_length=6)
+  semester = models.CharField(max_length=200)
+
+  def __str__(self):
+    return f'{self.level} {self.semester}'
+
+  
 class Fee(models.Model):
   department = models.ForeignKey(Department, on_delete=models.CASCADE)
   fee = models.CharField(max_length=200)

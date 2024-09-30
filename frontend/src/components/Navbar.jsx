@@ -62,7 +62,7 @@ const Navbar = ({ rightButton }) => {
             user ? "block" : "hidden"
           } py-2 px-4 text-gray-800 hover:text-sky-600 cursor-pointer hover:bg-gray-100 transition-all ease-in-out duration-300`}
         >
-          Home
+          <Link to={"http://localhost:5173/payment/"}>Home</Link>
         </li>
         <li
           className={`${

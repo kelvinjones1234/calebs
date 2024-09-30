@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import PrivateRoute from "./utils/PrivateRoute";
 import PaymentPage from "./pages/PaymentPage";
@@ -9,6 +8,7 @@ import RecieptPage from "./pages/RecieptPage";
 import { AuthProvider } from "./context/AuthContext";
 import { FormDataProvider } from "./context/FormDataContext";
 import TransactionsPage from "./pages/TransactionsPage";
+import RegistrationPage from "./pages/RegisterPage";
 
 function App() {
   return (
@@ -16,7 +16,8 @@ function App() {
       <AuthProvider>
         <FormDataProvider>
           <Routes>
-            <Route path="/home-page" element={<HomePage />} />
+            <Route path="/register" element={<RegistrationPage />} />
+            <Route path="/login" element={<LoginPage />} />
             <Route path="/receipt-page" element={<RecieptPage />} />{" "}
             {/* Corrected spelling here */}
             <Route element={<PrivateRoute />}>

@@ -5,7 +5,7 @@ from .models import Transaction
 class TransactionSerializer(serializers.ModelSerializer):
   class Meta:
     model = Transaction
-    fields = ['matriculation_number', 'first_name', 
+    fields = ['matriculation_number', 'first_name', 'level', 'semester', 
               'middle_name', 'last_name', 'email', 'department', 
               'fee', 'amount', 'date', 'paid', 'reference_number']
 
@@ -18,5 +18,5 @@ class GetTransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
         fields = ['matriculation_number', 'first_name', 
-                  'middle_name', 'last_name', 'email', 'department', 
+                  'middle_name', 'last_name', 'level', 'semester', 'email', 'department', 
                   'fee', 'amount', 'date', 'paid', 'reference_number']

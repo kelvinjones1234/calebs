@@ -15,6 +15,7 @@ const ReceiptPage = () => {
 
   const location = useLocation();
 
+  console.log(transactionData);
   const getTransactionReference = () => {
     const query = new URLSearchParams(location.search);
     return query.get("reference");
@@ -55,17 +56,18 @@ const ReceiptPage = () => {
           await axios.post(
             `http://localhost:8000/api/transaction/`,
             {
-              matriculation_number:
-                transactionData.metadata.matriculation_number,
-              first_name: transactionData.metadata.first_name,
-              middle_name: transactionData.metadata.middle_name,
-              last_name: transactionData.metadata.last_name,
-              email: 1,
-              department: transactionData.metadata.department_id,
+              matriculation_number: user.user_id,
+              first_name: user.first_name,
+              middle_name: user.middle_name,
+              last_name: user.last_name,
+              email: user.email,
+              department: user.dept_id,
               fee: transactionData.metadata.fee_id,
               amount: transactionData.metadata.amount,
               paid: transactionData.status === "success",
               reference_number: transactionData.reference,
+              level: transactionData.metadata.level,
+              semester: transactionData.metadata.semester,
             },
             {
               headers: {
@@ -92,13 +94,18 @@ const ReceiptPage = () => {
 
       <div className="p-3 bg-gray-100 min-h-screen min-w-[375px] flex justify-center items-center">
         <div className="bg-white sm:px-[2rem] p-3 rounded-lg shadow-lg w-full max-w-3xl">
-          {error && <div className="text-red-500 mb-4">{error}</div>}
+          {error && (
+            <div className="text-red-500 mb-4 text-center">{error}</div>
+          )}
           {transactionData ? (
             <div>
               <div className="flex justify-between items-center mb-4 mx-5">
                 <div>
                   <h1 className="text-3xl font-bold text-sky-500">RECEIPT</h1>
-                  <p className="text-gray-600">Payment Receipt</p>
+                  <p className="text-gray-600">
+                    Payment Receipt for {transactionData.metadata.level}{" "}
+                    {transactionData.metadata.semester}
+                  </p>
                 </div>
                 <div className="">
                   <img src={bidalogo} alt="" className="" />
@@ -111,8 +118,7 @@ const ReceiptPage = () => {
                     Student Information
                   </h3>
                   <p className="text-gray-600 py-1">
-                    Matriculation Number:{" "}
-                    {transactionData.metadata.matriculation_number}
+                    Matriculation Number: {user.username}
                   </p>
                   <p className="text-gray-600 py-1">
                     First Name: {transactionData.metadata.first_name}

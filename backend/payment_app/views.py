@@ -1,15 +1,21 @@
 from django.shortcuts import render
-from .serializers import DepartmentSerializer, FeeSerializer
+from .serializers import DepartmentSerializer, FeeSerializer, OtherDataSerializer
 from rest_framework.decorators import api_view
 from rest_framework import status, generics
 from rest_framework.response import Response
-from.models import Department, Fee
+from.models import Department, Fee, OtherData
 
 
 @api_view(['GET'])
 def DepartmentListView(request):
   departments = Department.objects.all()
   serializer = DepartmentSerializer(departments, many=True)
+  return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def OtherDataListView(request):
+  departments = OtherData.objects.all()
+  serializer = OtherDataSerializer(departments, many=True)
   return Response(serializer.data, status=status.HTTP_200_OK)
 
 class LevyByDepartment(generics.ListAPIView):

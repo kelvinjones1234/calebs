@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import axios from "axios";
 
 const AuthContext = createContext();
 export default AuthContext;
@@ -20,10 +21,11 @@ export const AuthProvider = ({ children }) => {
       : null
   );
 
-  const loginUser = async (email, password) => {
+  const loginUser = async (matNo, password) => {
+    console.log(matNo)
     try {
-      if (!email || !password) {
-        alert("Email abd password are required for logging in");
+      if (!matNo || !password) {
+        alert("Email and password are required for logging in");
         return;
       }
 
@@ -33,49 +35,67 @@ export const AuthProvider = ({ children }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: email,
+          username: matNo.toUpperCase(),
           password: password,
         }),
       });
-      const data = await response.json();
-      if (response.status === 200) {
+
+      if (response.ok) {
+        const data = await response.json();
         setAuthTokens(data);
         setUser(jwtDecode(data.access));
         localStorage.setItem("authTokens", JSON.stringify(data));
         navigate("/payment/");
       } else {
         console.error("Login failed:", response.statusText);
+        alert("Login failed. Please check your credentials.");
       }
     } catch (error) {
       console.error("Login failed:", error.message);
+      alert("An error occurred during login. Please try again.");
     }
   };
-  const registerUser = async (email, password) => {
+
+  const registerUser = async (
+    password,
+    email,
+    firstName,
+    lastName,
+    matNo,
+    middleName,
+    department,
+    phone
+  ) => {
     try {
-      if (!email || !password) {
-        alert("Email and password are required to create and account");
-        return;
-      }
-      const respones = await fetch("http://localhost:8000/api/signup/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      const response = await axios.post(
+        "http://localhost:8000/api/signup/",
+        {
+          username: matNo.toUpperCase(),
+          first_name: firstName,
+          middle_name: middleName,
           email: email,
+          last_name: lastName,
+          department: department,
+          phone: phone,
           password: password,
-        }),
-      });
-      const data = await respones.json();
-      if (respones.status === 200) {
-        navigate("/payment/");
-        console.error("Login successful", respones.statusText);
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.status === 201) {
+        navigate("/login");
       } else {
-        console.error("Login failed:", error.message);
-        setShowError(true);
+        alert("Something went wrong!");
       }
     } catch (error) {
-      console.error("Registeration failed:", error.message);
+      console.error(
+        "Error:",
+        error.response ? error.response.data : error.message
+      );
     }
   };
 
@@ -83,17 +103,19 @@ export const AuthProvider = ({ children }) => {
     setAuthTokens(null);
     setUser(null);
     localStorage.removeItem("authTokens");
-    navigate("/home-page/");
+    navigate("/login");
   };
+
   const AuthContextData = {
-    register: register,
-    user: user,
-    authTokens: authTokens,
-    registerUser: registerUser,
-    loginUser: loginUser,
-    setRegister: setRegister,
-    logoutUser: logoutUser,
+    register,
+    user,
+    authTokens,
+    registerUser,
+    loginUser,
+    setRegister,
+    logoutUser,
   };
+
   return (
     <AuthContext.Provider value={AuthContextData}>
       {children}
